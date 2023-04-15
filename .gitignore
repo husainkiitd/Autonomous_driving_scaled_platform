@@ -1,0 +1,15 @@
+# ROS build artifacts
+devel/
+build/
+install/
+logs/
+.catkin_workspace
+
+# Python/C++ binaries
+*.pyc
+__pycache__/
+build/
+
+# Your specific folders if you want them ignored
+catkin_ws/build/
+catkin_ws/devel/
