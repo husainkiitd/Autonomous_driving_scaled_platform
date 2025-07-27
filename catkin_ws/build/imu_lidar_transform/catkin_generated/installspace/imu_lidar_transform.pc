@@ -1,0 +1,8 @@
+prefix=/home/kishor/catkin_ws/install
+
+Name: imu_lidar_transform
+Description: Description of imu_lidar_transform
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

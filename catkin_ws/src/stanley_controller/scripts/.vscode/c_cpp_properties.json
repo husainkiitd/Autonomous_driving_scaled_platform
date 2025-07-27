@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/noetic/include/**",
+        "/home/kishor/catkin_ws/devel/include/**",
+        "/home/kishor/catkin_ws/src/custom_msg/include/**",
+        "/home/kishor/catkin_ws/src/hector_slam/hector_geotiff/include/**",
+        "/home/kishor/catkin_ws/src/hector_slam/hector_map_tools/include/**",
+        "/home/kishor/catkin_ws/src/hector_slam/hector_mapping/include/**",
+        "/home/kishor/catkin_ws/src/hector_slam/hector_marker_drawing/include/**",
+        "/home/kishor/catkin_ws/src/ldlidar_stl_ros/include/**",
+        "/home/kishor/catkin_ws/src/rrt/include/**",
+        "/home/kishor/catkin_ws/src/stanley_controller/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

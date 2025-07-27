@@ -1,0 +1,8 @@
+prefix=/home/kishor/catkin_ws/install
+
+Name: ekf_lidar_imu
+Description: Description of ekf_lidar_imu
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

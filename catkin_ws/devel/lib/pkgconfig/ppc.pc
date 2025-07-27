@@ -1,0 +1,8 @@
+prefix=/home/kishor/catkin_ws/devel
+
+Name: ppc
+Description: Description of ppc
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

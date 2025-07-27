@@ -1,0 +1,8 @@
+prefix=/home/kishor/catkin_ws/install
+
+Name: rrt_star
+Description: Description of rrt_star
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
