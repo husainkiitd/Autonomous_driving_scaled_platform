@@ -2,8 +2,7 @@
 
 This repository contains the complete software stack for a 1/10 scale autonomous vehicle, integrating ROS, hardware control, and advanced path planning algorithms. The project is designed to perform autonomous navigation using sensor data, global path planning, and local path tracking controllers.
 
-![Hybrid A* Animation](hybrid_a_star_animation.gif)
-***Note: To display the animation, create a GIF named `hybrid_a_star_animation.gif` from the simulation and upload it to the root of this repository.***
+
 
 ## Project Overview
 
