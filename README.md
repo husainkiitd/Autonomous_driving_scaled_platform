@@ -40,12 +40,4 @@ The system operates on a hierarchical control loop where a global plan is genera
 The data flow is as follows:
 **Sensors → SLAM (`/map`, `/slam_out_pose`) → Hybrid A* (`/globalpath`) → Stanley/LQR Controller (`/cmd_vel`) → Arduino → Actuators**
 
-## How to Set Up and Run the Project
 
-Follow these instructions to set up the environment and run both the standalone simulation and the full ROS application.
-
-### Part 1: Running the Standalone Hybrid A* Simulation
-
-This allows you to test the global planner on your local machine without needing ROS.
-
-**1. Clone the Repository**
