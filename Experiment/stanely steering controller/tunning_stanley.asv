@@ -1,0 +1,141 @@
+%%%%%%%%%%%%%%%%% race track %%%%%%%%%%%%%%%
+R = 2;
+D = 3;
+
+x1 = 0;
+y1 = 0;
+
+th1 = 0:1:179;
+
+for i = 1:180
+    x2(i) = D/2 + R*sind(th1(i));
+    y2(i) = R - R*cosd(th1(i));
+end
+
+for i = 1:180
+    x3(i) = -D/2 - R*sind(th1(i));
+    y3(i) = R + R*cosd(th1(i));
+
+end
+x4 = -0.1;
+y4 = 0;
+
+x = [x1 x2 x3 x4];
+y = [y1 y2 y3 y4];
+
+refPose =[x;y]'; 
+xRef = refPose(:,1);
+yRef = refPose(:,2);
+
+% calculate distance vector
+distancematrix = squareform(pdist(refPose));
+distancesteps = zeros(length(refPose)-1,1);
+for i = 2:length(refPose)
+    distancesteps(i-1,1) = distancematrix(i,i-1);
+end
+totalDistance = sum(distancesteps); % Total distance travelled
+distbp = cumsum([0; distancesteps]); % Distance for each waypoint
+gradbp = linspace(0,totalDistance,1000); % Linearize distance
+
+% linearize X and Y vectors based on distance
+xRef2 = interp1(distbp,xRef,gradbp);
+yRef2 = interp1(distbp,yRef,gradbp);
+yRef2s = smooth(gradbp,yRef2); % smooth waypoints
+xRef2s = smooth(gradbp,xRef2); % smooth waypoints
+xRef = xRef2s;
+yRef = yRef2s;
+
+
+
+
+
+data1 = load("stnl10march_1.mat");
+data2 = load("stnl10march_2.mat");
+data3 = load("stnl10march_2.75.mat");
+data4 = load("stnl10march_3.mat");
+data5 = load("stnl10march_4.mat");
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+time1 =data1.out.pose.time(:,1);
+xx1 =data1.out.pose.signals.values(:,1);
+yy1 =data1.out.pose.signals.values(:,2);
+theta1 =data1.out.pose.signals.values(:,3);
+mind1 =data1.out.min_d.signals.values(:,1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+time2 =data2.out.pose.time(:,1);
+xx2 =data2.out.pose.signals.values(:,1);
+yy2 =data2.out.pose.signals.values(:,2);
+theta2 =data2.out.pose.signals.values(:,3);
+mind2 =data2.out.min_d.signals.values(:,1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+time3 =data3.out.pose.time(:,1);
+xx3 =data3.out.pose.signals.values(:,1);
+yy3 =data3.out.pose.signals.values(:,2);
+theta3 =data3.out.pose.signals.values(:,3);
+mind3 =data3.out.min_d.signals.values(:,1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+time4 =data4.out.pose.time(:,1);
+xx4 =data4.out.pose.signals.values(:,1);
+yy4 =data4.out.pose.signals.values(:,2);
+theta4 =data4.out.pose.signals.values(:,3);
+mind4 =data4.out.min_d.signals.values(:,1);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+time5 =data5.out.pose.time(:,1);
+xx5 =data5.out.pose.signals.values(:,1);
+yy5 =data5.out.pose.signals.values(:,2);
+theta5 =data5.out.pose.signals.values(:,3);
+mind5 =data5.out.min_d.signals.values(:,1);
+
+
+
+%%%% plot trajectory
+figure(1)
+plot(xx3,yy3,xRef,yRef,"LineWidth",1)
+xlabel("X-axis (m)",'interpreter','latex')
+ylabel("Y-axis (m)",'interpreter','latex')
+legend('Actual','Reference','interpreter','latex')
+title("Tracking Stanley Experimental",'interpreter','latex')
+set(gca, 'FontSize', 12);
+
+
+
+%%%% plot states
+figure(2)
+subplot(2,2,1)
+plot(time1(306:1134)-12,mind1(306:1134),time2(204:1008)-8,mind2(204:1008),time3(51:897)-2,mind3(51:897),time4(255:1101)-10,mind4(255:1101),time5,mind5,"LineWidth",1)
+legend('K\_1.0','K\_2.0','K\_2.75','K\_3.0','K\_4.0')
+xlabel("Time (s)",'interpreter','latex')
+ylabel("Cross Track Error (m)",'interpreter','latex')
+title("Tuning Cross Track Gain (K)",'interpreter','latex')
+grid on
+set(gca, 'FontSize', 12);
+
+subplot(2,2,2)
+plot(time1,mind1,"LineWidth",1)
+legend('K\_1.0','K\_2.0','K\_2.75','K\_3.0','K\_4.0')
+xlabel("Time (s)",'interpreter','latex')
+ylabel("Cross Track Error (m)",'interpreter','latex')
+title("Tuning Cross Track Gain (K)",'interpreter','latex')
+grid on
+set(gca, 'FontSize', 12);
+
+subplot(2,2,3)
+plot(time1,mind2,"LineWidth",1)
+legend('K\_1.0','K\_2.0','K\_2.75','K\_3.0','K\_4.0')
+xlabel("Time (s)",'interpreter','latex')
+ylabel("Cross Track Error (m)",'interpreter','latex')
+title("Tuning Cross Track Gain (K)",'interpreter','latex')
+grid on
+set(gca, 'FontSize', 12);
+
+subplot(2,2,4)
+plot(time1(306:1134)-12,mind1(306:1134),time2(204:1008)-8,mind2(204:1008),time3(51:897)-2,mind3(51:897),time4(255:1101)-10,mind4(255:1101),time5,mind5,"LineWidth",1)
+legend('K\_1.0','K\_2.0','K\_2.75','K\_3.0','K\_4.0')
+xlabel("Time (s)",'interpreter','latex')
+ylabel("Cross Track Error (m)",'interpreter','latex')
+title("Tuning Cross Track Gain (K)",'interpreter','latex')
+grid on
+set(gca, 'FontSize', 12);
